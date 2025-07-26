@@ -3,6 +3,9 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
+  role: 'admin' | 'user';
+  provider: 'google' | 'github';
+  createdAt?: string;
 }
 
 export interface SiteContent {
@@ -37,9 +40,10 @@ export interface SiteContent {
 
 export interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (provider: 'google' | 'github') => Promise<boolean>;
   logout: () => void;
   loading: boolean;
+  checkAuthStatus: () => Promise<void>;
 }
 
 export interface ApiResponse<T> {
